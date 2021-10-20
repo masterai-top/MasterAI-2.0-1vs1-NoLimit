@@ -1,4 +1,4 @@
-# MasterAI-2.0-1vs1-NoLimit
+1vs1-NoLimit
 
 ## Introduction
 
