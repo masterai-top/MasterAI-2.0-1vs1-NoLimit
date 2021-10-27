@@ -1,0 +1,8 @@
+import torch
+
+TORCH_FLOAT16 = torch.float16
+TORCH_FLOAT32 = torch.float32
+TORCH_FLOAT64 = torch.float64
+
+TORCH_FLOAT = TORCH_FLOAT32
+TORCH_DOUBLE = TORCH_FLOAT64

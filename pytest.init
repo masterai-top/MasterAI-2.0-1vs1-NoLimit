@@ -1,0 +1,13 @@
+[pytest]
+;addopts : Configure pytest command line arguments
+;addopts = --html=./report/report.html --self-contained-html --tb=short --cache-clear --color=yes
+;testpaths : Test file path
+testpaths = ./tests
+;python_files : Test file name
+python_files = *_test.py
+;python_classes : Test class name
+python_classes = Test*
+;Ignore related files to collect test cases
+norecursedirs = .svn _build tmp*
+;Specify a cache directory
+cache_dir = ./report/.pytest-cache

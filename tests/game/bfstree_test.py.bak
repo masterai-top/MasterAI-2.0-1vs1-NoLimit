@@ -1,0 +1,47 @@
+import random
+from game.bfstree import BFSTree
+from game.texas_holdem.texas_holdem_hunl import Game, PartialPublicState, \
+    draw_cards
+
+
+class TestBFSTree:
+    def test_unroll_tree(self):
+        game = Game(num_deck_cards=52, num_hole_cards=2)
+        # preflop
+        root = game.get_initial_state(stack_size=400)
+        tree, pseudo_leaves_indices = ut_tree(game, root, 0)
+        # flop
+        root = tree[random.choice(pseudo_leaves_indices)].state
+        root.board_cards += draw_cards(3, root)
+        tree, pseudo_leaves_indices = ut_tree(game, root, 1)
+        # turn
+        root = tree[random.choice(pseudo_leaves_indices)].state
+        root.board_cards += draw_cards(1, root)
+        tree, pseudo_leaves_indices = ut_tree(game, root, 2)
+        # river
+        root = tree[random.choice(pseudo_leaves_indices)].state
+        root.board_cards += draw_cards(1, root)
+        tree, pseudo_leaves_indices = ut_tree(game, root, 3)
+        assert len(pseudo_leaves_indices) == 0
+
+
+def ut_tree(game: Game, root: PartialPublicState, street: int):
+    max_depth = game.get_max_depth(state=root)
+    tree = BFSTree.unroll_tree(game=game, root=root)
+    pseudo_leaves_indices_ = []
+    pseudo_leaves_indices = []
+    tree_max_depth = 0
+    for node_id in range(len(tree)):
+        node = tree[node_id]
+        if tree_max_depth < node.depth:
+            tree_max_depth = node.depth
+        assert game.get_street(node.state) == street
+        assert node.depth < max_depth
+        if (not node.num_children) and (not game.is_terminal(node.state)):
+            pseudo_leaves_indices.append(node_id)
+        if game.is_pseudo_terminal(node.state):
+            if node_id > 0:
+                pseudo_leaves_indices_.append(node_id)
+    assert tree_max_depth == max_depth - 1
+    assert pseudo_leaves_indices == pseudo_leaves_indices_
+    return tree, pseudo_leaves_indices

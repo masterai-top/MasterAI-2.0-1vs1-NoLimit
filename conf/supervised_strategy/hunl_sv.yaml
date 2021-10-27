@@ -1,0 +1,26 @@
+env:
+  num_hole_cards: 2
+  num_deck_cards: 52
+  num_card_suits: 4
+  num_card_ranks: 13
+  actions: ["fold", "call & check", "raise", "allin"] # fixed
+  raise_ratios: [0.333, 0.5, 0.667, 1, 1.5, 2]
+  max_raise_times: 6
+  num_actions: 9
+  stack_size: 800
+  small_blind: 1
+  big_blind: 2
+  random_action_prob: 0.25
+  sample_leaf: true
+  subgame_params:
+    num_iters: 1024
+    max_depth: 50
+    linear_update: true
+    use_cfr: true
+model:
+  name: StrategyNet
+  kwargs:
+    n_hidden: 256
+value_net:
+  path: ./weights/epoch41.net
+  device: cuda:0

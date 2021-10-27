@@ -1,0 +1,54 @@
+defaults:
+  - optimizer: adam
+seed: 0
+decrease_lr_every: 800
+decrease_lr_times: 2
+grad_clip: 5.0
+env:
+  num_hole_cards: 2
+  num_deck_cards: 52
+  num_card_suits: 4
+  num_card_ranks: 13
+  actions: ["fold", "call & check", "raise", "allin"]
+  raise_ratios: [0.333, 0.5, 0.667, 1, 1.5, 2]
+  max_raise_times: 10
+  num_actions: 9
+  stack_size: 800
+  small_blind: 1
+  big_blind: 2
+  random_action_prob: 0.25
+  sample_leaf: true
+  subgame_params:
+    num_iters: 1024
+    max_depth: 50
+    linear_update: true
+exploit: true
+selfplay:
+  network_sync_epochs: 1
+  dump_dataset_every_epochs: 200
+  threads_per_gpu: -1
+  models_per_device: 1 # > 1 only for gpu
+  cpu_gen_threads: 60
+train_gen_ratio: 4
+task: selfplay
+loss: huber
+min_buffer_to_send: 2500
+max_epochs: 10000
+model:
+  name: Net
+  kwargs:
+    n_hidden: 1536
+    n_layers: 6
+    use_layer_norm: true
+create_validation_set_every: 100
+data:
+  train_epoch_size: 2560000
+  train_batch_size: 1024
+  val_epoch_size: 51200
+replay:
+  capacity: 12000000
+  alpha: 1.0
+  beta: 1.0
+  prefetch: 8
+  use_priority: false # use_priority is not supported
+logfile: "exp.log"

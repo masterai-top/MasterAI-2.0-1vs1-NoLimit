@@ -1,0 +1,74 @@
+syntax = "proto3";
+option cc_generic_services = false;
+package alg ;
+enum ALG_CMD
+{
+  ALG_CMD_NOT_DEFINE       = 0;
+  ALG_CMD_NODE_REGISER_REQ = 60001;
+  ALG_CMD_NODE_REGISER_RSP = 60002;
+  ALG_CMD_KEEPALIVE_REQ    = 60003;
+  ALG_CMD_KEEPALIVE_RSP    = 60004;
+  ALG_CMD_ROBOT_DECIDE_REQ = 60005;
+  ALG_CMD_ROBOT_DECIDE_RSP = 60006;
+
+}
+
+enum ALG_ERR
+{
+  ALG_SUCC = 0; //成功
+  ALG_FAIL = 1; //失败
+}
+
+message AlgNodeRegisterReq
+{
+  string token = 1; //连接密钥
+}
+
+message AlgNodeRegisterRsp
+{
+  int32 result = 1;
+}
+
+message AlgKeepAliveReq
+{
+  int32 timestamp = 1;
+}
+
+message AlgKeepAliveRsp
+{
+  int32 timestamp = 1;
+}
+
+message AlgRobotActionReq
+{
+  message ActionList{
+    repeated int32 action = 1;
+  }
+  int64          uid                = 1; //标识
+  int32          small_blind        = 2; //小盲
+  int32          big_blind          = 3; //大盲
+  bool           is_dealer          = 4; //是否庄家
+  repeated int32 hole_card          = 5; //手牌（card = rank + suit x 16）
+  repeated int32 board_card         = 6; //公牌（card = rank + suit x 16）
+  int32          street             = 7; //hole = 1，flop = 2，turn = 3，river = 4
+  int32          self_bet_to        = 8; //AI累计下注
+  int32          oppo_bet_to        = 9; //对手累计下注
+  int32          self_init_chips    = 10; //AI初始筹码
+  int32          oppo_init_chips    = 11; //对手初始筹码
+  int32          self_street_bet_to = 12; //AI此街累计下注
+  int32          oppo_street_bet_to = 13; //对手此街累计下注
+  int32          self_allow_actions = 14; //AI允许的动作类型（按位表示，1：允许；0：不允许。call=1（001），fold=2（010），raise=4（100））
+  int64          runGameID          = 15; //辅助标识
+  map<int32, ActionList> action_list = 17;//动作序列
+  int32          action_num          = 18; //请求次数
+}
+
+message AlgRobotActionRsp
+{
+  int64 result   = 1; //操作结果
+  int64 uid      = 2; //标识
+  int32 action   = 3; //动作类型（call=1，fold=2，raise=3）
+  int32 bet_size = 4; //动作类型对应的下注大小，总的增加的筹码数（call：AI与对手已下注筹码数的差额；raise：AI与对手已下注筹码数的差额 + AI加注筹码数
+  int64 runGameID  = 5; //辅助标识
+  int32 action_num = 6;
+}
