@@ -4,6 +4,7 @@ MasterAI-2.0-1vs1-NoLimit
 
 MasterAI v2.0 is an iterative algorithm derived from MasterAI v1.0 
 It utilizes profound Reinforcement Learning + Search in imperfect-information games and achieves superhuman performance in heads-up no-limit Texas Hold’em. Furthermore, it is a major step toward developing technologies for multiagent interactions in real world.
+MasterAI v2.0是从MasterAI v1.0衍生出来的迭代算法，它在非完全信息游戏中利用了通用的强化学习+搜索，并在一对一无限押注的德州扑克中实现了超人的表现。是Master团队在非完美信息博弈中实现的的一种扑克AI，在德州扑克一对一的有限押注已经取得一定成果。MasterAI于2020年9月战胜了中国的14位最顶级扑克职业选手；
 
 ## Technology
 
@@ -28,6 +29,7 @@ The Master team is constantly exploring the innovation of AI algorithm, and hopi
 
                                                                 MasterAI v2.0
 一、简介
+
  MasterAI v2.0是从MasterAI v1.0衍生出来的迭代算法，它在非完全信息游戏中利用了通用的强化学习+搜索，并在一对一无限押注的德州扑克中实现了超人的表现。此外，这是在现实世界中开发多智能体交互技术的重要一步。
  ![微信图片_20241030103018](https://github.com/user-attachments/assets/a68c45e7-a4f5-4241-a85d-0a9cb7a85546)
 
