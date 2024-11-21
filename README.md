@@ -46,6 +46,6 @@ The Master team is constantly exploring the innovation of AI algorithm, and hopi
  3） Abstract CFR (400BB) Betting Tree的节点数量过大，超过4亿 。
 
 
-Master AI 2.0 的训练模型数据以及核心算法代码有偿出售。有兴趣者联系：telegram：@alibaba401
+Master AI 2.0 的训练模型数据以及核心算法代码有偿出售。有兴趣者联系：telegram：@xuzongbin001
 
  
