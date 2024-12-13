@@ -1,4 +1,4 @@
-MasterAI-2.0-1vs1-NoLimit
+德州1对1的AI，德州AI人工智能；MasterAI-2.0-1vs1-NoLimit
 
 ## Introduction
 
